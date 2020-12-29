@@ -1,6 +1,8 @@
 package BaseTests;
 
+import org.junit.Before;
 import org.junit.Test;
+
 
 public class BaseTests {
 

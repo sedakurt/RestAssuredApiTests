@@ -20,10 +20,11 @@ public class BaseTestsHelper {
         try {
              Response response = getResponseFromEndPoint(apiKey,searchMovie);
 
-                     JsonPath path = response.jsonPath();
+            assert response != null;
+            JsonPath path = response.jsonPath();
             response.getBody().prettyPrint();
-            List<MovieCheckAndControl> arrList = path.getList("Search", MovieCheckAndControl.class);
 
+            List<MovieCheckAndControl> arrList = path.getList("Search", MovieCheckAndControl.class);
 
             for (MovieCheckAndControl singleObject : arrList) {
                 if (singleObject.getTitle().equals(searchMovieTitle)) {
@@ -48,11 +49,11 @@ public class BaseTestsHelper {
                     .param("apikey", apiKey)
                     .param("i",id)
                     .when()
-                    .get()
+                       .get()
                     .then()
-                    .log()
-                    .all()
-                    .statusCode(200)
+                       .log()
+                       .all()
+                       .statusCode(200)
                     .body("Title", not(emptyOrNullString()))
                     .body("Year", not(emptyOrNullString()))
                     .body("Released", not(emptyOrNullString()));
